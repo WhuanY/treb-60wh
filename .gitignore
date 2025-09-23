@@ -1,0 +1,19 @@
+.* # 所有隐藏文件
+.DS_Store
+
+*.csv
+
+!data/.gitkeep # 保留空文件夹
+__pycache__/
+*.pyc
+
+*.docx
+*.tex
+
+output/*
+!output/.gitkeep
+
+model/*
+!model/.gitkeep
+
+*.ipynb
