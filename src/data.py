@@ -3,17 +3,14 @@ import torch
 from torch.utils.data import Dataset
 
 class DataSpliter:
-    def __init__(self, data, train_frac=0.8, test_frac=0.2, random_state=42):
-        assert train_frac + test_frac == 1.0, "Fractions must sum to 1"
+    def __init__(self, data, train_size, random_state=42):
+        assert train_size <= len(data), "Train size must be less than or equal to the total data size"
         self.data = data.sample(frac=1, random_state=random_state).reset_index(drop=True)  # Shuffle the data
-        self.train_frac = train_frac
-        self.test_frac = test_frac
+        self.train_size = train_size
 
     def split(self):
-        train_size = int(len(self.data) * self.train_frac)
-        train_data = self.data[:train_size]
-        test_data = self.data[train_size:]
-        
+        train_data = self.data[:self.train_size]
+        test_data = self.data[self.train_size:]
         return train_data, test_data
 
     def get_train_data(self):
